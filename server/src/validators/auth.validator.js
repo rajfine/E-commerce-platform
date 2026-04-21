@@ -23,10 +23,10 @@ export const validateRegisterUser = [
 
   body("password")
   .trim()
-  .isLength({min:10}).withMessage("Password must be at least 10 characters")
+  .isLength({min:6}).withMessage("Password must be at least 6 characters")
   .bail()
   .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$/)
-.withMessage(
+  .withMessage(
     "Password must be at least 6 chars, include uppercase, lowercase, number, and special character"
   ),
   

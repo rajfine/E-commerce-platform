@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useAuth } from '../hooks/useAuth';
 
@@ -66,6 +66,7 @@ const Register = () => {
     const [focused, setFocused] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const authError = useSelector((state) => state.auth.error);
+    const navigate = useNavigate();
 
     const handleInput = (e) => setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
@@ -111,6 +112,7 @@ const Register = () => {
                 password: formData.password,
                 isSeller: role === 'Seller'
             });
+            navigate("/");
         } catch {
             // Error state is already handled by useAuth and shown below the form.
         } finally {
@@ -121,17 +123,17 @@ const Register = () => {
     return (
         <div className="relative min-h-screen w-full flex font-sans selection:bg-amber-200">
             <style>{`
-                 @keyframes smoothFadeUp {
-                     from { opacity: 0; transform: translateY(30px); }
-                     to { opacity: 1; transform: translateY(0); }
-                 }
-                 .animate-entry {
-                     animation: smoothFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-                 }
-                 .animate-delay-1 { animation-delay: 0.1s; }
-                 .animate-delay-2 { animation-delay: 0.2s; }
-                 .animate-delay-3 { animation-delay: 0.3s; }
-             `}</style>
+                @keyframes smoothFadeUp {
+                    from { opacity: 0; transform: translateY(30px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                .animate-entry {
+                    animation: smoothFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                }
+                .animate-delay-1 { animation-delay: 0.1s; }
+                .animate-delay-2 { animation-delay: 0.2s; }
+                .animate-delay-3 { animation-delay: 0.3s; }
+            `}</style>
 
             {/* FULL-SCREEN BACKGROUND IMAGE */}
             <div className="absolute inset-0 z-0 overflow-hidden bg-neutral-900">
