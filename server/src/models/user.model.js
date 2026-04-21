@@ -13,8 +13,8 @@ const userSchema = new mongoose.Schema({
     unique: true
   },
   password: { 
-    type: String, 
-    requires: true
+    type: String,
+    required: true
   },
   role: {
     type: String,
@@ -27,19 +27,16 @@ const userSchema = new mongoose.Schema({
   }
 })
 
-userSchema.pre('save', async (next)=>{
-  if(!this.isModified("password")) return next()
-  
-  try{
-    const salt = await bcrypt.genSalt(10)
-    const hash = await bcrypt.hash(this.password, salt)
-    this.password = hash
-    next()
-  }catch(err){
-    next(err)
-  }
+userSchema.pre('save', async function (){
+  if(!this.isModified("password")) return
+
+  const salt = await bcrypt.genSalt(10)
+  const hash = await bcrypt.hash(this.password, salt)
+  this.password = hash
 })
 
+
+// we created a method to compare password
 userSchema.methods.comparePassword = async function(enteredPassword){
   return await bcrypt.compare(enteredPassword, this.password)
 }

@@ -2,11 +2,11 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 if(!process.env.MONGO_URI){
-  throw new error("MONGO_URI is not defined in environmental variables")
+  throw new Error("MONGO_URI is not defined in environmental variables")
 }
 
 if(!process.env.JWT_SECRET){
-  throw new error("JWT_SECRET not present")
+  throw new Error("JWT_SECRET not present")
 }
 
 export const config = {

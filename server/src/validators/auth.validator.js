@@ -19,14 +19,15 @@ export const validateRegisterUser = [
   .trim()
   .notEmpty().withMessage("contact is required")
   .matches(/^\d{10}$/)
-  .withMessage("Password must be exactly 10 digits"),
+  .withMessage("Contact must be exactly 10 digits"),
 
   body("password")
   .trim()
-  .isLength({min:6})
-  .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{10,}$/)
-  .withMessage(
-    "Password must be at least 10 chars, include uppercase, lowercase, number, and special character"
+  .isLength({min:10}).withMessage("Password must be at least 10 characters")
+  .bail()
+  .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$/)
+.withMessage(
+    "Password must be at least 6 chars, include uppercase, lowercase, number, and special character"
   ),
   
   body("fullname")
@@ -35,6 +36,32 @@ export const validateRegisterUser = [
 
   body("isSeller")
   .isBoolean().withMessage("isSeller must be a boolean value"),
+
+  validateResult
+]
+
+export const validateLoginUser = [
+  body("email")
+    .optional({ checkFalsy: true })
+    .trim()
+    .isEmail().withMessage("invalid Email"),
+
+  body("contact")
+    .optional({ checkFalsy: true })
+    .trim()
+    .matches(/^\d{10}$/)
+    .withMessage("Contact must be exactly 10 digits"),
+
+  body()
+    .custom((value) => {
+      if (!value.email && !value.contact) {
+        throw new Error("email or contact is required")
+      }
+      return true
+    }),
+
+  body("password")
+    .notEmpty().withMessage("password is required"),
 
   validateResult
 ]
