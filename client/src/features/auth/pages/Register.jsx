@@ -293,7 +293,7 @@ const Register = () => {
                         {/* Social Authentication */}
                         <div className="flex justify-center gap-5">
                             <button type="button" className="p-3.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl hover:bg-white/20 hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg group text-white">
-                                <span className="group-hover:scale-110 transition-transform block"><GoogleIcon /></span>
+                                <a href='api/auth/google' className="group-hover:scale-110 transition-transform block"><GoogleIcon /></a>
                             </button>
                             <button type="button" className="p-3.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl hover:bg-white/20 hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg group text-white">
                                 <span className="group-hover:scale-110 transition-transform block"><AppleIcon /></span>
