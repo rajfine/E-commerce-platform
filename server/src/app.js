@@ -4,11 +4,17 @@ import cors from 'cors'
 import passport, { strategies } from 'passport'
 import {Strategy as GoogleStretegy} from 'passport-google-oauth20'
 import { config } from './config/config.js'
+import productRouter from './routes/product.routes.js'
+import cookieParser from 'cookie-parser'
+
 
 const app = express()
 app.use(express.json())
 
 app.use(passport.initialize())
+
+
+app.use(cookieParser())
 
 passport.use(new GoogleStretegy({
   clientID: config.GOOGLE_CLIENT_ID,
@@ -27,5 +33,6 @@ app.use(cors({
 
 
 app.use("/api/auth", authRouter)
+app.use("/api/product", productRouter)
 
 export default app
