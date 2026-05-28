@@ -96,9 +96,9 @@ const Register = () => {
     };
     const getPasswordError = () => {
         if (!formData.password || focused === 'password') return '';
-        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{10,}$/.test(formData.password)
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{4,}$/.test(formData.password)
             ? ''
-            : 'Use 10+ chars with uppercase, lowercase, number, and special character';
+            : 'Use 4+ chars with uppercase, lowercase, number, and special character';
     };
 
     const handleSubmit = async (e) => {

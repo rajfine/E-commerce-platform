@@ -3,7 +3,7 @@ import { verifySeller } from '../middleware/auth.middleware.js'
 // import { validateProducts } from '../validators/product.validator.js'
 
 import multer from 'multer'
-import { createProduct } from '../controllers/product.controller.js'
+import {  createProductController, getSellerProductsController } from '../controllers/product.controller.js'
 import { validateProducts } from '../validators/product.validator.js'
 
 const upload = multer({
@@ -15,7 +15,20 @@ const upload = multer({
 
 const productRouter = Router()
 
-productRouter.post("/create", verifySeller, upload.array("images", 7), validateProducts, createProduct )
+/**
+ * @route POST /api/product/create
+ * @description crate a new product 
+ * @access Public
+ */
+productRouter.post("/create", verifySeller, upload.array("images", 7), validateProducts, createProductController )
+
+
+/**
+ * @route GET /api/product/myproducts/seller
+ * @description show my all posted product
+ * @access Private (Seller only)
+ */
+productRouter.get("/myproducts/seller", verifySeller, getSellerProductsController)
 
 
 
