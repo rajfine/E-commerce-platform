@@ -35,3 +35,9 @@ export const login = async ({email, contact, password})=>{
     throw err
   }
 }
+
+
+export const getMe = async ()=>{
+  const response = await authApiInstance.get("/me")
+  return response.data
+}

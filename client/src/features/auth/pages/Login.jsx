@@ -80,12 +80,16 @@ const Login = () => {
         const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginId);
 
         try {
-            await handleLogin({
+            const user = await handleLogin({
                 email: isEmail ? loginId : '',
                 contact: isEmail ? '' : loginId,
                 password: formData.password
             });
-            navigate("/");
+            if(user.role == "buyer"){
+                navigate("/");
+            }else if(user.role == "seller"){
+                navigate("/seller/dashboard")
+            }
         } catch {
             // Error state is already handled by useAuth.
         } finally {

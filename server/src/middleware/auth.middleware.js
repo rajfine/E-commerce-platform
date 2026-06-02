@@ -29,3 +29,29 @@ export const verifySeller =  async (req, res, next)=>{
     })
   }
 }
+
+
+export const authenticateUser = async (req, res, next)=>{
+  const token = req.cookies.token
+  if(!token){
+    return res.status(404).json({
+      message: "token not found u need to login"
+    })
+  }
+
+  try{
+    const decoded = await jwt.verify(token, config.JWT_SECRET)
+    const user = await userModel.findById(decoded.id)
+
+    if(!user){
+      return res.status(401).json({message: "unauthorized"})
+    }
+    req.user = user
+    next()
+    
+  }catch(err){
+    return res.status(401).json({
+      message : "invalid token "
+    })
+  }
+}
