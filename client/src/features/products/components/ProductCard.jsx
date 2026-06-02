@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const ProductCard = ({ product, index = 0 }) => {
   const [hovered, setHovered] = useState(false)
   const [wishlisted, setWishlisted] = useState(false)
 
-  const imgSrc = product?.images?.[0] || '/images/cat-shirts.png'
-  const altImg = product?.images?.[1] || imgSrc
+  // console.log(product)
+  const imgSrc = product?.images[0].url || '/images/cat-shirts.png'
+  const altImg = product?.images[1]?.url || imgSrc
   const title = product?.title || 'Premium Product'
   const price = product?.price?.amount || 2499
   const currency = product?.price?.currency || 'INR'
+
+  const nevigate = useNavigate()
 
   const formatPrice = (amt, cur) => {
     if (cur === 'INR') return `₹${Number(amt).toLocaleString('en-IN')}`
@@ -23,7 +27,7 @@ const ProductCard = ({ product, index = 0 }) => {
       onMouseLeave={() => setHovered(false)}
     >
       {/* Image Container */}
-      <div className="relative aspect-[3/4] rounded-lg overflow-hidden bg-surface mb-4 cursor-pointer">
+      <div onClick={()=>{nevigate(`/product/${product._id}`)}} className="relative aspect-[3/4] rounded-lg overflow-hidden bg-surface mb-4 cursor-pointer">
         <img
           src={hovered ? altImg : imgSrc}
           alt={title}
