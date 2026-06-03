@@ -163,9 +163,13 @@ export default function Dashboard() {
           </div>
         ) : (
           /* Products Grid */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {sellerProducts.map(product => (
               <div 
+                onClick={()=>{
+                        navigate(`/seller/product/${product._id}`)
+                      }}
                 key={product._id} 
                 className={`${T.cardBg} ${T.cardBorder} ${T.cardShadow} rounded-3xl overflow-hidden flex flex-col h-full transition-all duration-300 group`}
               >
@@ -196,7 +200,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Card Content */}
-                <div className="p-6 flex-1 flex flex-col">
+                <div  className="p-6 flex-1 flex flex-col">
                   {/* Title & Price Row */}
                   <div className="flex justify-between items-start gap-4 mb-2">
                     <h3 
@@ -233,6 +237,9 @@ export default function Dashboard() {
                     
                     {/* Quick Action (Optional e.g. edit) */}
                     <button 
+                      onClick={()=>{
+                        navigate(`/seller/product/${product._id}`)
+                      }}
                       className={`p-2 rounded-lg transition-colors duration-200 ${dark ? 'hover:bg-[#2A2A2A] text-[#888] hover:text-[#E87040]' : 'hover:bg-[#F5F2EE] text-[#A39A96] hover:text-[#E87040]'}`}
                       aria-label="Edit Product"
                       title="Edit Product"
