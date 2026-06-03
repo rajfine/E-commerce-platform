@@ -259,7 +259,7 @@ const Home = () => {
       <Section id="brand-values" className="py-20 md:py-24 bg-surface">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {brandValues.map((val, i) => (
+            {brandValues.map((val) => (
               <div
                 key={val.title}
                 className="group bg-ivory rounded-xl p-8 md:p-10 text-center hover:shadow-[0_4px_30px_rgba(0,0,0,0.04)] transition-all duration-500 hover:-translate-y-1"
@@ -289,7 +289,7 @@ const Home = () => {
             </a>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {journalPosts.map((post, i) => (
+            {journalPosts.map((post) => (
               <a
                 key={post.title}
                 href="#"

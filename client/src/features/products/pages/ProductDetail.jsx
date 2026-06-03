@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useLayoutEffect, useState, useCallback } from 'react'
 import { useParams } from 'react-router'
 import { useNavigate } from 'react-router-dom'
 import { useProduct } from '../hooks/useProduct'
@@ -104,19 +104,38 @@ const ProductDetail = () => {
   const [quantity, setQuantity]         = useState(1)
   const [addedToCart, setAddedToCart]   = useState(false)
 
-  /* ── Fetch product ──────────────────────────────────────────────────────── */
-  useEffect(() => {
-    const fetch = async () => {
-      setLoading(true)
-      const data = await handleGetProductById(productId)
-      setProduct(data)
-      setLoading(false)
-    }
-    fetch()
+  /* ── Start each product detail view from the top ────────────────────────── */
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
   }, [productId])
 
-  /* ── Reset image loaded state on image change ────────────────────────────── */
-  useEffect(() => { setImageLoaded(false) }, [activeImage])
+  /* ── Fetch product ──────────────────────────────────────────────────────── */
+  useEffect(() => {
+    if (!productId) return
+
+    let active = true
+    const fetch = async () => {
+      setLoading(true)
+      try {
+        const data = await handleGetProductById(productId)
+        if (active) setProduct(data)
+      } catch (error) {
+        console.error('Failed to fetch product:', error)
+        if (active) setProduct(null)
+      } finally {
+        if (active) setLoading(false)
+      }
+    }
+    fetch()
+    return () => {
+      active = false
+    }
+  }, [handleGetProductById, productId])
+
+  const handleImageChange = useCallback((nextImage) => {
+    setImageLoaded(false)
+    setActiveImage(nextImage)
+  }, [])
 
   /* ── Derived helpers ────────────────────────────────────────────────────── */
   const formatPrice = useCallback((amount, currency) => {
@@ -226,7 +245,7 @@ const ProductDetail = () => {
             className="lg:w-[58%] animate-fade-in"
             aria-label="Product image gallery"
           >
-            <div className="flex gap-3 h-full">
+            <div className="flex items-start gap-3">
 
               {/* ── Vertical Thumbnail Strip ── */}
               <div className="hidden sm:flex flex-col gap-2.5 w-[68px] flex-shrink-0">
@@ -234,7 +253,7 @@ const ProductDetail = () => {
                   <button
                     key={img._id}
                     id={`thumbnail-${idx}`}
-                    onClick={() => setActiveImage(idx)}
+                    onClick={() => handleImageChange(idx)}
                     aria-label={`View image ${idx + 1}`}
                     className={`relative w-full aspect-[3/4] overflow-hidden rounded-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal/40 ${
                       activeImage === idx
@@ -256,9 +275,9 @@ const ProductDetail = () => {
               </div>
 
               {/* ── Main Image ── */}
-              <div className="flex-1 relative overflow-hidden rounded-sm bg-surface group">
+              <div className="flex-1 relative aspect-[3/4] max-h-[85vh] overflow-hidden rounded-sm bg-surface group">
                 {/* Subtle zoom on hover */}
-                <div className="w-full h-full overflow-hidden">
+                <div className="absolute inset-0 overflow-hidden">
                   <img
                     key={currentImage?.url}
                     src={currentImage?.url}
@@ -267,7 +286,6 @@ const ProductDetail = () => {
                     className={`w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-[1.03] ${
                       imageLoaded ? 'opacity-100' : 'opacity-0'
                     }`}
-                    style={{ minHeight: '520px', maxHeight: '85vh' }}
                   />
                   {/* Image fade-in overlay */}
                   {!imageLoaded && (
@@ -280,7 +298,7 @@ const ProductDetail = () => {
                   {product.images.map((_, idx) => (
                     <button
                       key={idx}
-                      onClick={() => setActiveImage(idx)}
+                      onClick={() => handleImageChange(idx)}
                       className={`rounded-full transition-all duration-300 ${
                         activeImage === idx
                           ? 'w-4 h-1.5 bg-charcoal'
@@ -300,7 +318,7 @@ const ProductDetail = () => {
                 {/* ── Prev Button ── */}
                 <button
                   id="img-prev"
-                  onClick={() => setActiveImage((i) => Math.max(0, i - 1))}
+                  onClick={() => handleImageChange((i) => Math.max(0, i - 1))}
                   disabled={activeImage === 0}
                   aria-label="Previous image"
                   className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-ivory/85 backdrop-blur-sm rounded-sm text-charcoal/70 hover:text-charcoal hover:bg-ivory transition-all duration-200 disabled:opacity-20 disabled:cursor-not-allowed opacity-0 group-hover:opacity-100"
@@ -313,7 +331,7 @@ const ProductDetail = () => {
                 {/* ── Next Button ── */}
                 <button
                   id="img-next"
-                  onClick={() => setActiveImage((i) => Math.min(product.images.length - 1, i + 1))}
+                  onClick={() => handleImageChange((i) => Math.min(product.images.length - 1, i + 1))}
                   disabled={activeImage === product.images.length - 1}
                   aria-label="Next image"
                   className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-ivory/85 backdrop-blur-sm rounded-sm text-charcoal/70 hover:text-charcoal hover:bg-ivory transition-all duration-200 disabled:opacity-20 disabled:cursor-not-allowed opacity-0 group-hover:opacity-100"
@@ -330,7 +348,7 @@ const ProductDetail = () => {
               {product.images.map((img, idx) => (
                 <button
                   key={img._id}
-                  onClick={() => setActiveImage(idx)}
+                  onClick={() => handleImageChange(idx)}
                   className={`flex-shrink-0 w-16 h-20 rounded-sm overflow-hidden transition-all duration-300 ${
                     activeImage === idx
                       ? 'ring-[1.5px] ring-charcoal'
