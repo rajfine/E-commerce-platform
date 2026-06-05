@@ -173,9 +173,12 @@ export const addProductVariantController = async (req, res)=>{
     }
   })
 
-  const validPrices = product.variant.map(v => v.price?.amount).filter(amt => typeof amt === 'number' && !isNaN(amt))
-  if (validPrices.length > 0) {
-    product.price.amount = Math.min(...validPrices)
+  if (product.variant.length > 0 && product.variant[0].price) {
+    product.price = {
+      amount: product.variant[0].price.amount,
+      currency: product.variant[0].price.currency
+    }
+    product.markModified('price')
   }
 
   await product.save()
@@ -242,9 +245,12 @@ export const updateVariantController = async (req, res) => {
     variant.images = finalImages
   }
 
-  const validPrices = product.variant.map(v => v.price?.amount).filter(amt => typeof amt === 'number' && !isNaN(amt))
-  if (validPrices.length > 0) {
-    product.price.amount = Math.min(...validPrices)
+  if (product.variant.length > 0 && product.variant[0].price) {
+    product.price = {
+      amount: product.variant[0].price.amount,
+      currency: product.variant[0].price.currency
+    }
+    product.markModified('price')
   }
 
   await product.save()

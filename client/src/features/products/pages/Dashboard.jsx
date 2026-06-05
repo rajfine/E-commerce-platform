@@ -197,7 +197,7 @@ export default function Dashboard() {
                       className="text-[#E87040] font-bold text-[16px] whitespace-nowrap"
                       style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}
                     >
-                      {formatPrice(product.price?.amount, product.price?.currency)}
+                      {formatPrice(product?.variant?.[0]?.price?.amount ?? product.price?.amount, product?.variant?.[0]?.price?.currency || product.price?.currency)}
                     </div>
                   </div>
 

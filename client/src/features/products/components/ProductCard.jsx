@@ -9,8 +9,8 @@ const ProductCard = ({ product, index = 0 }) => {
   const imgSrc = product?.images[0].url || '/images/cat-shirts.png'
   const altImg = product?.images[1]?.url || imgSrc
   const title = product?.title || 'Premium Product'
-  const price = product?.price?.amount || 2499
-  const currency = product?.price?.currency || 'INR'
+  const price = product?.variant?.[0]?.price?.amount ?? (product?.price?.amount || 2499)
+  const currency = product?.variant?.[0]?.price?.currency || product?.price?.currency || 'INR'
 
   const nevigate = useNavigate()
 

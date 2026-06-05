@@ -1480,7 +1480,7 @@ const SellerProductDetails = () => {
                   </span>
                   <span style={{ color: T.divider }}>·</span>
                   <span className="text-[12px] font-semibold text-[#E87040]" style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}>
-                    {fmtPrice(product.price?.amount, product.price?.currency)} base
+                    {fmtPrice(product?.variant?.[0]?.price?.amount ?? product.price?.amount, product?.variant?.[0]?.price?.currency || product.price?.currency)} base
                   </span>
                 </div>
               </div>
