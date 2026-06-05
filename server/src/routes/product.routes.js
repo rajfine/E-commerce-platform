@@ -3,7 +3,7 @@ import { verifySeller } from '../middleware/auth.middleware.js'
 // import { validateProducts } from '../validators/product.validator.js'
 
 import multer from 'multer'
-import {  createProductController, getAllProductController, getProductDetailsController, getSellerProductsController } from '../controllers/product.controller.js'
+import {  addProductVariantController, createProductController, getAllProductController, getProductDetailsController, getSellerProductsController, updateVariantController, deleteVariantController } from '../controllers/product.controller.js'
 import { validateProducts } from '../validators/product.validator.js'
 
 const upload = multer({
@@ -41,6 +41,26 @@ productRouter.get("/", getAllProductController)
  * @route
  */
 productRouter.get('/details/:id', getProductDetailsController)
+
+
+/**
+ * @route PUT /:productId/variant
+ * @description add a new variant to a product
+ * @access Private (Seller only)
+ */
+productRouter.put("/:productId/variant", verifySeller, upload.array("images", 7), addProductVariantController )
+
+/**
+ * @route PUT /:productId/variant/:variantId
+ * @description update variant stock or attributes (sizes)
+ */
+productRouter.put("/:productId/variant/:variantId", verifySeller, upload.array("images", 7), updateVariantController)
+
+/**
+ * @route DELETE /:productId/variant/:variantId
+ * @description delete a variant
+ */
+productRouter.delete("/:productId/variant/:variantId", verifySeller, deleteVariantController)
 
 
 export default productRouter

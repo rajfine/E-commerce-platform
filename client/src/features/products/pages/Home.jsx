@@ -76,7 +76,6 @@ const Home = () => {
 
   return (
     <div className="bg-ivory min-h-screen overflow-x-hidden">
-      <Navbar />
 
       {/* ═══ 1. HERO SECTION ═══ */}
       <section id="hero" className="relative min-h-screen flex items-center pt-20 bg-ivory overflow-hidden">
@@ -84,14 +83,14 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center min-h-[80vh]">
             {/* Left - Image */}
             <div className={`relative transition-all duration-1000 ${heroLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-              <div className="relative rounded-2xl overflow-hidden aspect-[3/4] max-h-[75vh] mx-auto lg:mx-0 max-w-[520px]">
+              <div className="relative rounded-[3px] overflow-hidden aspect-[3/4] max-h-[75vh] mx-auto lg:mx-0 max-w-[520px]">
                 <img
                   src="/images/hero-model.png"
                   alt="SNITCH Fashion - Modern streetwear model"
                   className="w-full h-full object-cover"
                 />
                 {/* Floating Badge */}
-                <div className="absolute bottom-6 left-6 bg-white/80 backdrop-blur-md rounded-xl px-5 py-3">
+                <div className="absolute bottom-6 left-6 bg-white/80 backdrop-blur-md rounded-[3px] px-5 py-3">
                   <p className="text-[10px] font-semibold tracking-[0.12em] uppercase text-terracotta">New Season</p>
                   <p className="text-[13px] font-medium text-charcoal mt-0.5">Summer '25 Collection</p>
                 </div>
@@ -112,11 +111,11 @@ const Home = () => {
                 Premium fashion crafted for everyday elegance. Where minimalism meets modern sophistication.
               </p>
               <div className="flex flex-wrap gap-4 mt-10">
-                <a href="#best-sellers" className="inline-flex items-center gap-2 px-8 py-4 bg-terracotta text-white text-[12px] font-semibold tracking-[0.1em] uppercase rounded-lg hover:bg-terracotta-dark transition-all duration-300 hover:-translate-y-0.5">
+                <a href="#best-sellers" className="inline-flex items-center gap-2 px-8 py-4 bg-terracotta text-white text-[12px] font-semibold tracking-[0.1em] uppercase rounded-[3px] hover:bg-terracotta-dark transition-all duration-300 hover:-translate-y-0.5">
                   Shop Collection
                   <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                 </a>
-                <a href="#categories" className="inline-flex items-center gap-2 px-8 py-4 border border-charcoal/20 text-charcoal text-[12px] font-semibold tracking-[0.1em] uppercase rounded-lg hover:border-charcoal/50 hover:bg-charcoal/5 transition-all duration-300">
+                <a href="#categories" className="inline-flex items-center gap-2 px-8 py-4 border border-charcoal/20 text-charcoal text-[12px] font-semibold tracking-[0.1em] uppercase rounded-[3px] hover:border-charcoal/50 hover:bg-charcoal/5 transition-all duration-300">
                   Explore New Arrivals
                 </a>
               </div>
@@ -147,7 +146,7 @@ const Home = () => {
               <a
                 key={cat.name}
                 href="#"
-                className="group relative rounded-xl overflow-hidden aspect-[4/5] cursor-pointer"
+                className="group relative rounded-[3px] overflow-hidden aspect-[4/5] cursor-pointer"
                 style={{ animationDelay: `${i * 80}ms` }}
               >
                 <img
@@ -187,7 +186,7 @@ const Home = () => {
               ? bestSellers.map((p, i) => <ProductCard key={p._id || i} product={p} index={i} />)
               : Array.from({ length: 4 }).map((_, i) => (
                 <div key={i} className="animate-pulse">
-                  <div className="aspect-[3/4] rounded-lg bg-sand/40 mb-4" />
+                  <div className="aspect-[3/4] rounded-[3px] bg-sand/40 mb-4" />
                   <div className="h-3 bg-sand/40 rounded w-3/4 mb-2" />
                   <div className="h-3 bg-sand/40 rounded w-1/2" />
                 </div>
@@ -215,7 +214,7 @@ const Home = () => {
             <p className="font-body text-[15px] md:text-[17px] text-white/60 mt-5 max-w-[480px] leading-relaxed">
               Discover pieces designed to transcend seasons and trends.
             </p>
-            <a href="#" className="mt-9 inline-flex items-center gap-2 px-9 py-4 bg-terracotta text-white text-[12px] font-semibold tracking-[0.1em] uppercase rounded-lg hover:bg-terracotta-dark transition-all duration-300 hover:-translate-y-0.5">
+            <a href="#" className="mt-9 inline-flex items-center gap-2 px-9 py-4 bg-terracotta text-white text-[12px] font-semibold tracking-[0.1em] uppercase rounded-[3px] hover:bg-terracotta-dark transition-all duration-300 hover:-translate-y-0.5">
               Shop Collection
               <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </a>
@@ -245,7 +244,7 @@ const Home = () => {
               ))
               : Array.from({ length: 4 }).map((_, i) => (
                 <div key={i} className="min-w-[260px] md:min-w-0 animate-pulse">
-                  <div className="aspect-[3/4] rounded-lg bg-sand/40 mb-4" />
+                  <div className="aspect-[3/4] rounded-[3px] bg-sand/40 mb-4" />
                   <div className="h-3 bg-sand/40 rounded w-3/4 mb-2" />
                   <div className="h-3 bg-sand/40 rounded w-1/2" />
                 </div>
@@ -262,7 +261,7 @@ const Home = () => {
             {brandValues.map((val) => (
               <div
                 key={val.title}
-                className="group bg-ivory rounded-xl p-8 md:p-10 text-center hover:shadow-[0_4px_30px_rgba(0,0,0,0.04)] transition-all duration-500 hover:-translate-y-1"
+                className="group bg-ivory rounded-[3px] p-8 md:p-10 text-center hover:shadow-[0_4px_30px_rgba(0,0,0,0.04)] transition-all duration-500 hover:-translate-y-1"
               >
                 <div className="w-12 h-12 mx-auto mb-5 rounded-full bg-terracotta/8 flex items-center justify-center text-terracotta group-hover:bg-terracotta group-hover:text-white transition-all duration-400">
                   <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">{val.icon}</svg>
@@ -295,7 +294,7 @@ const Home = () => {
                 href="#"
                 className="group block"
               >
-                <div className="relative rounded-xl overflow-hidden aspect-[4/3] mb-5">
+                <div className="relative rounded-[3px] overflow-hidden aspect-[4/3] mb-5">
                   <img
                     src={post.img}
                     alt={post.title}
@@ -342,11 +341,11 @@ const Home = () => {
               onChange={e => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
-              className="flex-1 px-5 py-4 bg-white border border-sand rounded-lg text-[14px] text-charcoal placeholder:text-muted/60 focus:outline-none focus:border-terracotta/40 focus:ring-1 focus:ring-terracotta/20 transition-all"
+              className="flex-1 px-5 py-4 bg-white border border-sand rounded-[3px] text-[14px] text-charcoal placeholder:text-muted/60 focus:outline-none focus:border-terracotta/40 focus:ring-1 focus:ring-terracotta/20 transition-all"
             />
             <button
               type="submit"
-              className="px-8 py-4 bg-terracotta text-white text-[12px] font-semibold tracking-[0.1em] uppercase rounded-lg hover:bg-terracotta-dark transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
+              className="px-8 py-4 bg-terracotta text-white text-[12px] font-semibold tracking-[0.1em] uppercase rounded-[3px] hover:bg-terracotta-dark transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
             >
               Subscribe
             </button>

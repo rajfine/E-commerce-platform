@@ -659,6 +659,111 @@
 			"typeName": "binding"
 		},
 		{
+			"x": 2657.8609255687793,
+			"y": -1798.0116570560833,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:WvQ7lAUmP1MVm1QqJ7wd5",
+			"type": "geo",
+			"props": {
+				"w": 522.99609375,
+				"h": 119.77925492361486,
+				"geo": "rectangle",
+				"dash": "draw",
+				"growY": 157.90433882638513,
+				"url": "",
+				"scale": 1,
+				"color": "red",
+				"labelColor": "black",
+				"fill": "solid",
+				"size": "l",
+				"font": "draw",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"attrs": {
+						"dir": "auto"
+					},
+					"content": [
+						{
+							"type": "bulletList",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "listItem",
+									"attrs": {
+										"dir": "auto"
+									},
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "user can  only have one cart "
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"attrs": {
+										"dir": "auto"
+									},
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "user can add the product to cart "
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"attrs": {
+										"dir": "auto"
+									},
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "user can manage the quantity of product  and select size of product (cart can not have item lessthen 1)"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aouqgUal",
+			"typeName": "shape"
+		},
+		{
 			"x": 973.5229869981276,
 			"y": -4107.570783417287,
 			"rotation": 0,
@@ -1208,6 +1313,48 @@
 			"typeName": "shape"
 		},
 		{
+			"x": 1715.3771698234575,
+			"y": -61.7673737742507,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:UqGPLWjonVOjhbZMZStRz",
+			"type": "text",
+			"props": {
+				"color": "red",
+				"size": "xl",
+				"w": 421.4433659520474,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1.7365308487375584,
+				"richText": {
+					"type": "doc",
+					"attrs": {
+						"dir": "auto"
+					},
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "nav/ static"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "au8UYRzd",
+			"typeName": "shape"
+		},
+		{
 			"x": 5006.249559489403,
 			"y": -3405.5911233161737,
 			"rotation": 0,
@@ -1301,9 +1448,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 283.30140541767594,
-			"y": 1718.6572249733772,
-			"z": 0.3426540519389975,
+			"x": -1581.5653862524018,
+			"y": 1477.7876653237358,
+			"z": 0.12507047540743876,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -1968,6 +2115,55 @@
 			"typeName": "shape"
 		},
 		{
+			"x": 2650.20381084797,
+			"y": -965.9984940669553,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:8reocyX7IL6XcZPf61D2T",
+			"type": "geo",
+			"props": {
+				"w": 537.99609375,
+				"h": 128.44635195721276,
+				"geo": "rectangle",
+				"dash": "draw",
+				"growY": 0,
+				"url": "",
+				"scale": 1,
+				"color": "red",
+				"labelColor": "black",
+				"fill": "solid",
+				"size": "l",
+				"font": "draw",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"attrs": {
+						"dir": "auto"
+					},
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "POST /api/cart/add/:productId/:varient"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "arMJXLzl",
+			"typeName": "shape"
+		},
+		{
 			"meta": {},
 			"id": "binding:cmEqlf9CcLm5qjSdw1ikM",
 			"type": "arrow",
@@ -2003,6 +2199,48 @@
 				"terminal": "start"
 			},
 			"typeName": "binding"
+		},
+		{
+			"x": 1379.0523240443067,
+			"y": 666.3050429347905,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:Q9d9HTPiUhkZrx_jauNVr",
+			"type": "text",
+			"props": {
+				"color": "light-green",
+				"size": "xl",
+				"w": 203.8450469970703,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 3.434879516619638,
+				"richText": {
+					"type": "doc",
+					"attrs": {
+						"dir": "auto"
+					},
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Dynamic "
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "axQZGKLV",
+			"typeName": "shape"
 		},
 		{
 			"meta": {},
@@ -2178,6 +2416,54 @@
 			"typeName": "shape"
 		},
 		{
+			"x": 2673.9877429294233,
+			"y": -1393.8196598730858,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:FH-HRpkXCj7YW38tZE4qs",
+			"type": "text",
+			"props": {
+				"color": "red",
+				"size": "l",
+				"w": 78.29817199707031,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 0.959278982891644,
+				"richText": {
+					"type": "doc",
+					"attrs": {
+						"dir": "auto"
+					},
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "cart"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							}
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aq9ImrbV",
+			"typeName": "shape"
+		},
+		{
 			"x": 572.4082083449536,
 			"y": -1649.6067189684138,
 			"rotation": 0,
@@ -2287,6 +2573,48 @@
 				"terminal": "start"
 			},
 			"typeName": "binding"
+		},
+		{
+			"x": 4741.21989372653,
+			"y": -52.03851935248076,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:60czHPZx41QRzZtWrp__X",
+			"type": "text",
+			"props": {
+				"color": "red",
+				"size": "xl",
+				"w": 449.671875,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 2.7280580366684766,
+				"richText": {
+					"type": "doc",
+					"attrs": {
+						"dir": "auto"
+					},
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Aggregation pipline"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "azXrdjzl",
+			"typeName": "shape"
 		},
 		{
 			"meta": {},
@@ -2687,7 +3015,7 @@
 			"editingShapeId": null,
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:ZzDEVVZ9ujIVkPTxLc5CW"
+				"shape:xFsMEZLtgNBE6_BN6IPJv"
 			],
 			"hoveredShapeId": null,
 			"erasingShapeIds": [],
@@ -2926,6 +3254,368 @@
 			"typeName": "binding"
 		},
 		{
+			"x": 4373.813104176719,
+			"y": 246.16996184972004,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:xFsMEZLtgNBE6_BN6IPJv",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "xl",
+				"w": 2529.333251953125,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"attrs": {
+						"dir": "auto"
+					},
+					"content": [
+						{
+							"type": "heading",
+							"attrs": {
+								"dir": "auto",
+								"level": 2
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "📌 Aggregation Pipeline"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "bold"
+										}
+									],
+									"text": "Definition:"
+								},
+								{
+									"type": "hardBreak",
+									"attrs": {
+										"dir": "auto"
+									}
+								},
+								{
+									"type": "text",
+									"text": "Aggregation Pipeline is used in MongoDB to "
+								},
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "bold"
+										}
+									],
+									"text": "process, transform, and combine data from multiple collections"
+								},
+								{
+									"type": "text",
+									"text": "."
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "bold"
+										}
+									],
+									"text": "Example:"
+								},
+								{
+									"type": "hardBreak",
+									"attrs": {
+										"dir": "auto"
+									}
+								},
+								{
+									"type": "text",
+									"text": "Users + Orders + Products → One combined result using "
+								},
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "code"
+										}
+									],
+									"text": "$lookup"
+								},
+								{
+									"type": "text",
+									"text": "."
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "bold"
+										}
+									],
+									"text": "Memory Trick:"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "code"
+										}
+									],
+									"text": "Multiple Collections         ↓ Aggregation Pipeline         ↓ Single Result "
+								}
+							]
+						},
+						{
+							"type": "heading",
+							"attrs": {
+								"dir": "auto",
+								"level": 2
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "💳 Why Payment Logic is Not Done on Frontend"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "bold"
+										}
+									],
+									"text": "Reason:"
+								},
+								{
+									"type": "text",
+									"text": " Security"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Frontend data can be modified by users."
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "❌ Frontend:"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "code"
+										}
+									],
+									"text": "Amount = ₹2000 → User changes to ₹1 "
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "✅ Backend:"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "code"
+										}
+									],
+									"text": "Product ID      ↓ Backend fetches actual price      ↓ Creates payment order "
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "bold"
+										}
+									],
+									"text": "Memory Trick:"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "code"
+										}
+									],
+									"text": "Frontend = User Control (Unsafe) Backend = Server Control (Safe) "
+								}
+							]
+						},
+						{
+							"type": "heading",
+							"attrs": {
+								"dir": "auto",
+								"level": 2
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "🎯 One-Line Viva Answer"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "bold"
+										}
+									],
+									"text": "Aggregation Pipeline:"
+								},
+								{
+									"type": "hardBreak",
+									"attrs": {
+										"dir": "auto"
+									}
+								},
+								{
+									"type": "text",
+									"text": "\"Used to combine and process data from multiple MongoDB collections.\""
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "bold"
+										}
+									],
+									"text": "Payment on Backend:"
+								},
+								{
+									"type": "hardBreak",
+									"attrs": {
+										"dir": "auto"
+									}
+								},
+								{
+									"type": "text",
+									"text": "\"Payment logic is handled on the backend for security because frontend data can be manipulated by users.\""
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "b00zy1JOG",
+			"typeName": "shape"
+		},
+		{
 			"meta": {},
 			"id": "binding:tg1tzRy6RWWElZ11bcsOJ",
 			"type": "arrow",
@@ -3014,6 +3704,48 @@
 				"terminal": "start"
 			},
 			"typeName": "binding"
+		},
+		{
+			"x": 484.61816623977745,
+			"y": -209.15027996587287,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:fZ8QNznhtqZPAfYv04C4b",
+			"type": "text",
+			"props": {
+				"color": "red",
+				"size": "xl",
+				"w": 469.5611877441406,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"attrs": {
+						"dir": "auto"
+					},
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Outlet (react router)"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "atFaJXhV",
+			"typeName": "shape"
 		},
 		{
 			"meta": {},
@@ -4101,6 +4833,193 @@
 			},
 			"parentId": "page:page",
 			"index": "aRyzvwtAE8",
+			"typeName": "shape"
+		},
+		{
+			"x": 2664.6180027211935,
+			"y": -1348.5657073596703,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:h22XshOBMHDcpLI8kNKvT",
+			"type": "geo",
+			"props": {
+				"w": 506.9186643910298,
+				"h": 154.08844163652202,
+				"geo": "rectangle",
+				"dash": "draw",
+				"growY": 123.59515211347798,
+				"url": "",
+				"scale": 1,
+				"color": "red",
+				"labelColor": "black",
+				"fill": "solid",
+				"size": "l",
+				"font": "draw",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"attrs": {
+						"dir": "auto"
+					},
+					"content": [
+						{
+							"type": "bulletList",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "listItem",
+									"attrs": {
+										"dir": "auto"
+									},
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "userid"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							}
+						},
+						{
+							"type": "bulletList",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "listItem",
+									"attrs": {
+										"dir": "auto"
+									},
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "item: [{"
+												}
+											]
+										},
+										{
+											"type": "bulletList",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "listItem",
+													"attrs": {
+														"dir": "auto"
+													},
+													"content": [
+														{
+															"type": "paragraph",
+															"attrs": {
+																"dir": "auto"
+															},
+															"content": [
+																{
+																	"type": "text",
+																	"text": "product "
+																}
+															]
+														}
+													]
+												},
+												{
+													"type": "listItem",
+													"attrs": {
+														"dir": "auto"
+													},
+													"content": [
+														{
+															"type": "paragraph",
+															"attrs": {
+																"dir": "auto"
+															},
+															"content": [
+																{
+																	"type": "text",
+																	"text": "varient "
+																}
+															]
+														}
+													]
+												},
+												{
+													"type": "listItem",
+													"attrs": {
+														"dir": "auto"
+													},
+													"content": [
+														{
+															"type": "paragraph",
+															"attrs": {
+																"dir": "auto"
+															},
+															"content": [
+																{
+																	"type": "text",
+																	"text": "quentity size"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"attrs": {
+										"dir": "auto"
+									},
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "}]"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "ap9ozENl",
 			"typeName": "shape"
 		},
 		{
@@ -5197,6 +6116,43 @@
 			"typeName": "binding"
 		},
 		{
+			"x": 458.6765591040695,
+			"y": -147.61060550701995,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:1crZKlESeIJafTjXs6Byi",
+			"type": "geo",
+			"props": {
+				"w": 2945.0090903901005,
+				"h": 1791.2728528626742,
+				"geo": "rectangle",
+				"dash": "draw",
+				"growY": 0,
+				"url": "",
+				"scale": 1,
+				"color": "black",
+				"labelColor": "black",
+				"fill": "none",
+				"size": "m",
+				"font": "draw",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "asqFtwdV",
+			"typeName": "shape"
+		},
+		{
 			"x": 59.683927686163315,
 			"y": -3162.580673544583,
 			"rotation": 0,
@@ -5764,6 +6720,43 @@
 			"typeName": "binding"
 		},
 		{
+			"x": 477.634304973273,
+			"y": -113.23205300260497,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:ApqDUwIeLM755K1N8ISpQ",
+			"type": "geo",
+			"props": {
+				"w": 2904.5707697872367,
+				"h": 214.7719061284373,
+				"geo": "rectangle",
+				"dash": "draw",
+				"growY": 0,
+				"url": "",
+				"scale": 1,
+				"color": "red",
+				"labelColor": "black",
+				"fill": "none",
+				"size": "xl",
+				"font": "draw",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "avgrsP1V",
+			"typeName": "shape"
+		},
+		{
 			"meta": {},
 			"id": "binding:RVIpqQ5S7orhtKbpOloQH",
 			"type": "arrow",
@@ -6067,12 +7060,14 @@
 			"followingUserId": null,
 			"opacityForNextShape": 1,
 			"stylesForNextShape": {
-				"tldraw:color": "light-green"
+				"tldraw:color": "black",
+				"tldraw:geo": "rectangle",
+				"tldraw:size": "xl"
 			},
 			"brush": null,
 			"scribbles": [],
 			"cursor": {
-				"type": "default",
+				"type": "move",
 				"rotation": 0
 			},
 			"isFocusMode": false,
@@ -6082,8 +7077,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 930,
-				"h": 534.1666259765625
+				"w": 908.3333129882812,
+				"h": 765.8333129882812
 			},
 			"insets": [
 				false,
@@ -6100,9 +7095,9 @@
 			"isFocused": true,
 			"devicePixelRatio": 2.4000000953674316,
 			"isCoarsePointer": false,
-			"isHoveringCanvas": false,
+			"isHoveringCanvas": true,
 			"openMenus": [],
-			"isChangingStyle": true,
+			"isChangingStyle": false,
 			"isReadonly": false,
 			"meta": {},
 			"duplicateProps": null,
@@ -6505,6 +7500,43 @@
 			"typeName": "shape"
 		},
 		{
+			"x": 4342.527150119537,
+			"y": -95.36186226942709,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:krhJGD3w73E5TV4gBocFp",
+			"type": "geo",
+			"props": {
+				"w": 2911.9649290840616,
+				"h": 1792.806210474577,
+				"geo": "rectangle",
+				"dash": "draw",
+				"growY": 0,
+				"url": "",
+				"scale": 1,
+				"color": "light-green",
+				"labelColor": "black",
+				"fill": "none",
+				"size": "xl",
+				"font": "draw",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "ayNXHIbV",
+			"typeName": "shape"
+		},
+		{
 			"meta": {},
 			"id": "binding:PYw8kNh_ZWH60raVsyY3x",
 			"type": "arrow",
@@ -6588,6 +7620,14 @@
 			"parentId": "page:page",
 			"index": "a6EOYwPV",
 			"typeName": "shape"
+		},
+		{
+			"name": "",
+			"color": "#55B467",
+			"imageUrl": "",
+			"meta": {},
+			"id": "user:vhhm0yxG7QJ9VPADbPkQ5",
+			"typeName": "user"
 		},
 		{
 			"x": 1840.1836811065054,
@@ -6693,6 +7733,43 @@
 			},
 			"parentId": "page:page",
 			"index": "aTza1D0JZV",
+			"typeName": "shape"
+		},
+		{
+			"x": 478.76139294905244,
+			"y": 132.83563436424163,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:Emq13MSu_q-iGjxUBaI64",
+			"type": "geo",
+			"props": {
+				"w": 2893.8374791108204,
+				"h": 1476.8777970346773,
+				"geo": "rectangle",
+				"dash": "draw",
+				"growY": 0,
+				"url": "",
+				"scale": 1,
+				"color": "light-green",
+				"labelColor": "black",
+				"fill": "none",
+				"size": "xl",
+				"font": "draw",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "awIOVSnV",
 			"typeName": "shape"
 		},
 		{

@@ -18,7 +18,7 @@ const InputField = ({ label, name, type, value, onChange, focused, setFocused, e
 
     return (
         <div className="relative group">
-            <div className={`relative flex items-center w-full bg-white/70 backdrop-blur-md shadow-[inset_0_1px_3px_rgba(0,0,0,0.03)] border rounded-2xl transition-all duration-300 ${isFocused ? 'border-amber-400 ring-[3px] ring-amber-400/20' : error ? 'border-red-300 bg-red-50/50' : 'border-white/40 hover:border-white hover:bg-white/90'}`}>
+            <div className={`relative flex items-center w-full bg-white/70 backdrop-blur-md shadow-[inset_0_1px_3px_rgba(0,0,0,0.03)] border rounded-[3px] transition-all duration-300 ${isFocused ? 'border-amber-400 ring-[3px] ring-amber-400/20' : error ? 'border-red-300 bg-red-50/50' : 'border-white/40 hover:border-white hover:bg-white/90'}`}>
                 {prefix && (
                     <span className={`absolute left-4 top-6 text-[15px] font-medium transition-all duration-300 ${isActive ? 'text-neutral-800 opacity-100' : 'opacity-0'}`}>
                         {prefix}
@@ -185,9 +185,9 @@ const Register = () => {
                         </div>
 
                         {/* Role Segmented Control */}
-                        <div className="relative flex p-1.5 bg-black/20 backdrop-blur-md shadow-inner rounded-2xl mb-8 border border-white/10">
+                        <div className="relative flex p-1.5 bg-black/20 backdrop-blur-md shadow-inner rounded-[3px] mb-8 border border-white/10">
                             <div
-                                className="absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-white rounded-xl shadow-md transition-transform duration-500 cubic-bezier(0.34, 1.56, 0.64, 1)"
+                                className="absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-white rounded-[3px] shadow-md transition-transform duration-500 cubic-bezier(0.34, 1.56, 0.64, 1)"
                                 style={{ transform: role === 'Seller' ? 'translateX(100%)' : 'translateX(0)' }}
                             ></div>
                             {['User', 'Seller'].map((r) => (
@@ -195,7 +195,7 @@ const Register = () => {
                                     key={r}
                                     type="button"
                                     onClick={() => setRole(r)}
-                                    className={`relative flex-1 py-3 text-sm font-bold rounded-xl z-10 transition-colors duration-300 ${role === r ? 'text-amber-700' : 'text-white hover:text-white/80'}`}
+                                    className={`relative flex-1 py-3 text-sm font-bold rounded-[3px] z-10 transition-colors duration-300 ${role === r ? 'text-amber-700' : 'text-white hover:text-white/80'}`}
                                 >
                                     {r}
                                 </button>
@@ -235,7 +235,7 @@ const Register = () => {
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="p-1.5 text-neutral-500 hover:text-amber-600 hover:bg-black/5 rounded-lg transition-all focus:outline-none"
+                                        className="p-1.5 text-neutral-500 hover:text-amber-600 hover:bg-black/5 rounded-[3px] transition-all focus:outline-none"
                                         aria-label="Toggle password visibility"
                                     >
                                         {showPassword ? <EyeOff /> : <Eye />}
@@ -261,7 +261,7 @@ const Register = () => {
                             </div>
 
                             {authError && (
-                                <p className="rounded-xl bg-red-500/90 px-4 py-3 text-sm font-semibold text-white">
+                                <p className="rounded-[3px] bg-red-500/90 px-4 py-3 text-sm font-semibold text-white">
                                     {authError}
                                 </p>
                             )}
@@ -270,7 +270,7 @@ const Register = () => {
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full mt-8 py-4 bg-amber-500 text-neutral-900 rounded-2xl font-bold text-sm tracking-wide shadow-[0_10px_20px_rgba(245,158,11,0.25)] hover:shadow-[0_15px_25px_rgba(245,158,11,0.35)] hover:-translate-y-1 hover:bg-amber-400 active:translate-y-0 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+                                className="w-full mt-8 py-4 bg-amber-500 text-neutral-900 rounded-[3px] font-bold text-sm tracking-wide shadow-[0_10px_20px_rgba(245,158,11,0.25)] hover:shadow-[0_15px_25px_rgba(245,158,11,0.35)] hover:-translate-y-1 hover:bg-amber-400 active:translate-y-0 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
                             >
                                 {isSubmitting ? (
                                     <svg className="animate-spin h-5 w-5 text-neutral-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
@@ -292,10 +292,10 @@ const Register = () => {
 
                         {/* Social Authentication */}
                         <div className="flex justify-center gap-5">
-                            <button type="button" className="p-3.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl hover:bg-white/20 hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg group text-white">
+                            <button type="button" className="p-3.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-[3px] hover:bg-white/20 hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg group text-white">
                                 <a href='api/auth/google' className="group-hover:scale-110 transition-transform block"><GoogleIcon /></a>
                             </button>
-                            <button type="button" className="p-3.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl hover:bg-white/20 hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg group text-white">
+                            <button type="button" className="p-3.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-[3px] hover:bg-white/20 hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg group text-white">
                                 <span className="group-hover:scale-110 transition-transform block"><AppleIcon /></span>
                             </button>
                         </div>

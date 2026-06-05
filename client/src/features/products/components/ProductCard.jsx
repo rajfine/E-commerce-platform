@@ -27,7 +27,7 @@ const ProductCard = ({ product, index = 0 }) => {
       onMouseLeave={() => setHovered(false)}
     >
       {/* Image Container */}
-      <div onClick={()=>{nevigate(`/product/${product._id}`)}} className="relative aspect-[3/4] rounded-lg overflow-hidden bg-surface mb-4 cursor-pointer">
+      <div onClick={()=>{nevigate(`/product/${product._id}`)}} className="relative aspect-[3/4] rounded-[3px] overflow-hidden bg-surface mb-4 cursor-pointer">
         <img
           src={hovered ? altImg : imgSrc}
           alt={title}
@@ -46,7 +46,7 @@ const ProductCard = ({ product, index = 0 }) => {
         </button>
         {/* Quick View */}
         <div className="absolute bottom-0 left-0 right-0 p-4 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-          <button className="w-full py-3 bg-charcoal/90 backdrop-blur-sm text-white text-[12px] font-medium tracking-[0.1em] uppercase rounded-lg hover:bg-charcoal transition-colors">
+          <button className="w-full py-3 bg-charcoal/90 backdrop-blur-sm text-white text-[12px] font-medium tracking-[0.1em] uppercase rounded-[3px] hover:bg-charcoal transition-colors">
             Quick View
           </button>
         </div>

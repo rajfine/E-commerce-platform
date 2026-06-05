@@ -1,4 +1,4 @@
-import { createProduct, getSellerProducts, getAllProducts, getProductById } from '../services/product.api.js'
+import { createProduct, getSellerProducts, getAllProducts, getProductById, updateProduct, addVariant, updateVariant, deleteVariant } from '../services/product.api.js'
 import { setSellerProducts, setProducts } from '../state/product.slice.js'
 import { useDispatch } from 'react-redux'
 import { useCallback } from 'react'
@@ -29,5 +29,28 @@ export const useProduct = ()=>{
   }, [])
 
 
-  return { handleCreateProduct, handleGetSellerProducts, handleGetAllProducts, handleGetProductById}
+//!!!!!!
+
+  const handleUpdateProduct = useCallback(async (productId, data) => {
+    const result = await updateProduct(productId, data)
+    return result.product
+  }, [])
+
+  const handleAddVariant = useCallback(async (productId, variantData) => {
+    const result = await addVariant(productId, variantData)
+    return result
+  }, [])
+
+  const handleUpdateVariant = useCallback(async (productId, variantId, variantData) => {
+    const result = await updateVariant(productId, variantId, variantData)
+    return result
+  }, [])
+
+  const handleDeleteVariant = useCallback(async (productId, variantId) => {
+    const result = await deleteVariant(productId, variantId)
+    return result
+  }, [])
+
+
+  return { handleCreateProduct, handleGetSellerProducts, handleGetAllProducts, handleGetProductById, handleUpdateProduct, handleAddVariant, handleUpdateVariant, handleDeleteVariant}
 }

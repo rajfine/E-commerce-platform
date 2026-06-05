@@ -11,35 +11,6 @@ const Fonts = () => (
 )
 
 /* ── Theme Toggle Button ──────────────────────────── */
-const ThemeToggle = ({ dark, onToggle }) => (
-  <button
-    type="button"
-    onClick={onToggle}
-    title={dark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-    className={`fixed top-5 right-5 z-50 w-11 h-11 rounded-full flex items-center justify-center
-      shadow-lg transition-all duration-200 hover:scale-110 active:scale-95
-      ${dark
-        ? 'bg-[#2A2A2A] hover:bg-[#333] text-yellow-300 border border-[#3A3A3A]'
-        : 'bg-white hover:bg-[#F5F2EE] text-[#57423B] border border-[#DDD8D3] shadow-[0_2px_10px_rgba(0,0,0,0.08)]'
-      }`}
-    aria-label="Toggle theme"
-  >
-    {dark ? (
-      /* Sun icon */
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="5" strokeWidth={2} strokeLinecap="round" />
-        <path strokeWidth={2} strokeLinecap="round" d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-      </svg>
-    ) : (
-      /* Moon icon */
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-          d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />
-      </svg>
-    )}
-  </button>
-)
-
 /* ── Formatter ────────────────────────────────────── */
 const formatPrice = (amount, currency) => {
   return new Intl.NumberFormat('en-IN', {
@@ -62,7 +33,7 @@ export default function Dashboard() {
   const { handleGetSellerProducts } = useProduct()
   const sellerProducts = useSelector(state => state.product.sellerProducts) || []
 
-  const [dark, setDark] = useState(true)
+  const dark = document.documentElement.classList.contains('dark')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -96,35 +67,47 @@ export default function Dashboard() {
       <Fonts />
 
       {/* ── Theme toggle — fixed top-right ── */}
-      <ThemeToggle dark={dark} onToggle={() => setDark(d => !d)} />
+      
 
       {/* Header section */}
-      <div className="max-w-7xl mx-auto mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 mt-4">
-        <div>
-          <h1
-            className={`text-[40px] sm:text-[48px] font-extrabold leading-none tracking-tight ${T.headText}`}
+      <div className="max-w-7xl mx-auto mb-10 mt-4">
+        <div className="mb-6 flex">
+          <button 
+            onClick={() => navigate('/')} 
+            className={`text-[12px] uppercase tracking-widest ${T.subText} hover:text-[#E87040] transition-colors flex items-center gap-2 font-bold`}
             style={{ fontFamily: 'Epilogue, sans-serif' }}
           >
-            Dashboard
-          </h1>
-          <p className={`mt-2 text-[14px] ${T.subText}`} style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}>
-            Manage your uploaded products and inventory.
-          </p>
+            ← Back to Shop
+          </button>
         </div>
         
-        <button
-          type="button"
-          onClick={() => navigate('/seller/createproduct')}
-          style={{ fontFamily: 'Epilogue, sans-serif' }}
-          className={`flex-shrink-0 px-6 py-3.5 rounded-xl text-[14px] font-bold text-white transition-all duration-200
-            bg-[#E87040] hover:bg-[#D0612C] hover:shadow-[0_6px_20px_rgba(232,112,64,0.35)] active:scale-[0.98]
-            flex items-center gap-2`}
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-          </svg>
-          Add New Product
-        </button>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <h1
+              className={`text-[40px] sm:text-[48px] font-extrabold leading-none tracking-tight ${T.headText}`}
+              style={{ fontFamily: 'Epilogue, sans-serif' }}
+            >
+              Dashboard
+            </h1>
+            <p className={`mt-2 text-[14px] ${T.subText}`} style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}>
+              Manage your uploaded products and inventory.
+            </p>
+          </div>
+          
+          <button
+            type="button"
+            onClick={() => navigate('/seller/createproduct')}
+            style={{ fontFamily: 'Epilogue, sans-serif' }}
+            className={`flex-shrink-0 px-6 py-3.5 rounded-[3px] text-[14px] font-bold text-white transition-all duration-200
+              bg-[#E87040] hover:bg-[#D0612C] hover:shadow-[0_6px_20px_rgba(232,112,64,0.35)] active:scale-[0.98]
+              flex items-center gap-2`}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+            Add New Product
+          </button>
+        </div>
       </div>
 
       {/* Main Content Area */}
@@ -133,7 +116,7 @@ export default function Dashboard() {
           /* Loading skeleton grid */
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
-              <div key={i} className={`${T.cardBg} ${T.cardBorder} rounded-3xl overflow-hidden animate-pulse flex flex-col h-[380px]`}>
+              <div key={i} className={`${T.cardBg} ${T.cardBorder} rounded-[3px] overflow-hidden animate-pulse flex flex-col h-[380px]`}>
                 <div className={`h-[240px] w-full ${dark ? 'bg-[#2A2A2A]' : 'bg-[#E5E1DB]'}`}></div>
                 <div className="p-5 flex-1 flex flex-col gap-3">
                   <div className={`h-5 w-3/4 rounded ${dark ? 'bg-[#333]' : 'bg-[#DCD8D3]'}`}></div>
@@ -148,7 +131,7 @@ export default function Dashboard() {
           </div>
         ) : sellerProducts.length === 0 ? (
           /* Empty state */
-          <div className={`${T.cardBg} ${T.cardBorder} rounded-3xl p-12 text-center flex flex-col items-center justify-center min-h-[400px]`}>
+          <div className={`${T.cardBg} ${T.cardBorder} rounded-[3px] p-12 text-center flex flex-col items-center justify-center min-h-[400px]`}>
             <div className={`w-20 h-20 mb-6 rounded-full flex items-center justify-center ${dark ? 'bg-[#2A2A2A] text-[#555]' : 'bg-[#F5F2EE] text-[#C2B9B3]'}`}>
               <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
@@ -171,7 +154,7 @@ export default function Dashboard() {
                         navigate(`/seller/product/${product._id}`)
                       }}
                 key={product._id} 
-                className={`${T.cardBg} ${T.cardBorder} ${T.cardShadow} rounded-3xl overflow-hidden flex flex-col h-full transition-all duration-300 group`}
+                className={`${T.cardBg} ${T.cardBorder} ${T.cardShadow} rounded-[3px] overflow-hidden flex flex-col h-full transition-all duration-300 group`}
               >
                 {/* Image container */}
                 <div className="relative h-[280px] w-full overflow-hidden bg-[#E5E1DB]">
@@ -240,7 +223,7 @@ export default function Dashboard() {
                       onClick={()=>{
                         navigate(`/seller/product/${product._id}`)
                       }}
-                      className={`p-2 rounded-lg transition-colors duration-200 ${dark ? 'hover:bg-[#2A2A2A] text-[#888] hover:text-[#E87040]' : 'hover:bg-[#F5F2EE] text-[#A39A96] hover:text-[#E87040]'}`}
+                      className={`p-2 rounded-[3px] transition-colors duration-200 ${dark ? 'hover:bg-[#2A2A2A] text-[#888] hover:text-[#E87040]' : 'hover:bg-[#F5F2EE] text-[#A39A96] hover:text-[#E87040]'}`}
                       aria-label="Edit Product"
                       title="Edit Product"
                     >
