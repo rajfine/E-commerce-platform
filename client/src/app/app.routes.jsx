@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet } from 'react-router-dom'
+import { createBrowserRouter, Outlet, useLocation } from 'react-router-dom'
 import Register from '../features/auth/pages/Register'
 import Login from '../features/auth/pages/Login'
 import CreateProduct from '../features/products/pages/CreateProduct'
@@ -11,9 +11,13 @@ import Navbar from '../features/products/components/Navbar'
 import Cart from '../features/cart/pages/Cart'
 
 const AppLayout = () => {
+  const location = useLocation()
+  const hideNavbarPaths = ['/login', '/register']
+  const shouldHideNavbar = hideNavbarPaths.includes(location.pathname)
+
   return (
     <>
-      <Navbar />
+      {!shouldHideNavbar && <Navbar />}
       <Outlet />
     </>
   )

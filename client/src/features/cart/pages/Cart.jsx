@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
-  const cartItems = useSelector(state => state.cart.items) || []
+  const cart = useSelector(state => state.cart) || []
   const {handleAddItem , handleGetCart, handleUpdateSize, handleRemoveFromCart, handleUpdateQuantity } = useCart()
   const navigate = useNavigate()
 
@@ -12,13 +12,10 @@ const Cart = () => {
     handleGetCart()
   },[])
 
-  console.log(cartItems)
-
   // Calculate totals
-  const subtotal = cartItems.reduce((acc, item) => acc + (item.price?.amount || 0) * item.quantity, 0)
+  const subtotal = cart?.cart?.totalPrice
   const shipping = 0 // Free
   const total = subtotal + shipping
-
   return (
     <main className="w-full min-h-screen bg-ivory text-charcoal px-4 md:px-8 pt-24 md:pt-32 pb-16 lg:pb-24 font-body animate-fade-in">
       <div className="max-w-7xl mx-auto">
@@ -32,10 +29,10 @@ const Cart = () => {
         </div>
         <header className="mb-8 md:mb-12 flex items-baseline justify-between border-b border-border pb-4">
           <h1 className="font-display text-2xl uppercase tracking-widest">Shopping Cart</h1>
-          <span className="text-xs uppercase tracking-widest text-muted">{cartItems.length} {cartItems.length === 1 ? 'Item' : 'Items'}</span>
+          <span className="text-xs uppercase tracking-widest text-muted">{cart?.items?.length} {cart?.items?.length === 1 ? 'Item' : 'Items'}</span>
         </header>
 
-      {cartItems.length === 0 ? (
+      {cart?.items?.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20">
           <p className="text-muted text-base tracking-widest uppercase mb-6">Your cart is empty.</p>
           <a href="/" className="bg-charcoal text-ivory px-6 py-3 text-sm tracking-widest uppercase hover:bg-softblack transition-colors">
@@ -46,7 +43,7 @@ const Cart = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
           {/* Cart Items List */}
           <div className="lg:col-span-8 flex flex-col gap-8">
-            {cartItems.map((item) => (
+            {cart?.items?.map((item) => (
               <div key={item._id} className="flex flex-col md:flex-row gap-6 pb-8 border-b border-border group">
                 <div className="w-full md:w-36 aspect-[3/4] bg-surface overflow-hidden">
                   <img 

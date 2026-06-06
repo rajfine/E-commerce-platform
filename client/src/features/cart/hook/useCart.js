@@ -1,6 +1,6 @@
 import { addToCart , getCart, updateCartItemSize, removeFromCart, updateCartItemQuantity } from '../service/cart.api.js'
 import { useDispatch } from 'react-redux'
-import {addItem  , setItems } from '../state/cart.slice.js'
+import {addItem, setItems, setCart } from '../state/cart.slice.js'
 
 
 export const useCart = ()=>{
@@ -16,13 +16,14 @@ export const useCart = ()=>{
     if (data && data.success !== false) {
       await handleGetCart()
     }
-    return data
+    return data.cart
   }
 
   async function handleGetCart(){
     const data = await getCart()
     dispatch(setItems(data.cart.items))
-    return data
+    dispatch(setCart(data.cart))
+    return data.cart
   }
 
   async function handleUpdateSize(itemId, size) {
@@ -30,7 +31,7 @@ export const useCart = ()=>{
     if (data.success) {
       await handleGetCart() // Refresh cart after update
     }
-    return data
+    return data.cart
   }
 
   async function handleRemoveFromCart(itemId) {
@@ -38,7 +39,7 @@ export const useCart = ()=>{
     if (data.success) {
       await handleGetCart()
     }
-    return data
+    return data.cart
   }
 
   async function handleUpdateQuantity(itemId, quantity) {
@@ -46,7 +47,7 @@ export const useCart = ()=>{
     if (data.success) {
       await handleGetCart()
     }
-    return data
+    return data.cart
   }
 
   return {handleAddItem, handleGetCart, handleUpdateSize, handleRemoveFromCart, handleUpdateQuantity}

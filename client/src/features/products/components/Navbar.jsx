@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useCart } from '../../cart/hook/useCart'
+import { useAuth } from '../../auth/hooks/useAuth'
 
 const Navbar = () => {
   const [scrolled, setScrolled]       = useState(false)
@@ -11,6 +12,7 @@ const Navbar = () => {
   const nevigate = useNavigate()
   const location = useLocation()
   const { handleGetCart } = useCart()
+  const { handleLogout } = useAuth()
 
   const isCartPage = location.pathname === '/cart'
 
@@ -169,11 +171,31 @@ const Navbar = () => {
             </div>
 
             {/* Profile / Login */}
-            <a href={user ? '#' : '/login'} aria-label="Profile" className="hidden md:block text-charcoal/70 hover:text-charcoal transition-colors">
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
-              </svg>
-            </a>
+            <div className="relative group hidden md:block">
+              <a href={user ? '#' : '/login'} aria-label="Profile" className="text-charcoal/70 hover:text-charcoal transition-colors py-2 block">
+                <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
+                </svg>
+              </a>
+              {user && (
+                <div className="absolute right-0 top-full mt-0 w-[200px] bg-ivory border border-border shadow-2xl opacity-0 invisible transition-all duration-300 z-50 group-hover:opacity-100 group-hover:visible">
+                  <div className="p-4 border-b border-border bg-ivory text-center">
+                    <p className="font-display tracking-widest text-sm text-charcoal truncate">Hi, {user.fullname || user.username || 'User'}</p>
+                  </div>
+                  <div className="p-4 bg-ivory flex justify-center">
+                    <button 
+                      onClick={() => {
+                        handleLogout()
+                        nevigate('/login')
+                      }}
+                      className="text-[11px] font-semibold tracking-[0.1em] uppercase text-white bg-charcoal hover:bg-terracotta transition-colors px-6 py-2.5"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* Mobile hamburger */}
             <button

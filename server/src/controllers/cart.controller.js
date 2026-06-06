@@ -1,7 +1,7 @@
 import cartModel from '../models/cart.model.js'
 import { stockOfVariant } from '../dao/product.dao.js'
 import productModel from '../models/product.model.js'
-
+import mongoose from 'mongoose'
 
 export const addToCartController = async (req, res)=>{
   console.log("addToCartController hit")
@@ -95,35 +95,98 @@ export const removeFromCartController = async (req, res)=>{
   }
 }
 
-export const getCartController = async (req, res)=>{
-  const user = req.user
-  let cart = await cartModel.findOne({user: user._id})
-  .populate("items.product")
-  
-  if(!cart){
-    cart = await cartModel.create({user: user._id})
-  }
-
-  const cartObj = cart.toObject();
-
-  cartObj.items = cartObj.items.map(item => {
-    if (item.product && item.product.variant) {
-      const selectedVariant = item.product.variant.find(
-        v => v._id.toString() === item.variant.toString()
-      );
-      
-      if(selectedVariant) {
-        item.variant = selectedVariant;
+export const getCartController = async (req, res) => {
+  try {
+    const user = req.user
+    // let cart = await cartModel.findOne({user: user._id}).populate("items.product") 
+    let cart = await cartModel.aggregate([
+      {
+        $match: {
+          user: new mongoose.Types.ObjectId(user._id)
+        }
+      },
+      { $unwind: { path: '$items' } },
+      {
+        $lookup: {
+          from: 'products',
+          localField: 'items.product',
+          foreignField: '_id',
+          as: 'items.product'
+        }
+      },
+      { $unwind: { path: '$items.product' } },
+      {
+        $unwind: { path: '$items.product.variant' }
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: [
+              '$items.variant',
+              '$items.product.variant._id'
+            ]
+          }
+        }
+      },
+      {
+        $addFields: {
+          itemPrice: {
+            price: {
+              $multiply: [
+                '$items.quantity',
+                '$items.product.variant.price.amount'
+              ]
+            },
+            currency:
+              '$items.product.variant.price.currency'
+          }
+        }
+      },
+      {
+        $group: {
+          _id: '$_id',
+          totalPrice: { $sum: '$itemPrice.price' },
+          currency: {
+            $first: '$itemPrice.currency'
+          },
+          items: { $push: '$items' }
+        }
       }
-    }
-    return item;
-  });
+    ])
+    // console.log(cart[0])
 
-  return res.status(200).json({
-    message: "Cart fetched successfully",
-    success: true,
-    cart: cartObj
-  })
+    if (cart.length === 0) {
+      let existingCart = await cartModel.findOne({ user: user._id });
+      if (!existingCart) {
+        existingCart = await cartModel.create({ user: user._id, items: [] });
+      }
+      return res.status(200).json({
+        message: "Cart fetched successfully",
+        success: true,
+        cart: existingCart.toObject()
+      });
+    }
+
+    const cartObj = cart[0];
+    console.log(cartObj)
+
+    // cart = cartObj.items.map(item => {
+    //   if (item.product && item.product.variant) {
+    //     // Due to $unwind in the pipeline, item.product.variant is already the single matched variant object, not an array.
+    //     item.variant = item.product.variant;
+    //   }
+    //   return item;
+    // });
+
+    return res.status(200).json({
+      message: "Cart fetched successfully",
+      success: true,
+      cart: cartObj
+    })
+  } catch (error) {
+    console.error("getCartController error:", error);
+    return res.status(500).json({ success: false, message: "Internal server error", error: error.message });
+  }
 }
 
 export const updateCartItemSizeController = async (req, res) => {
