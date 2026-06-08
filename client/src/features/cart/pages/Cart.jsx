@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react'
-import { useCart } from '../hook/useCart'
+import { useCart } from '../hook/useCart.js'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import {useRazorpay} from 'react-razorpay'
 
 const Cart = () => {
   const cart = useSelector(state => state.cart) || []
-  const {handleAddItem , handleGetCart, handleUpdateSize, handleRemoveFromCart, handleUpdateQuantity } = useCart()
+  const {handleAddItem , handleGetCart, handleUpdateSize, handleRemoveFromCart, handleUpdateQuantity, handleCreateOrder , handleVerifyOrder, handleClearLocalCart} = useCart()
+  const user = useSelector(state => state.auth.user)
   const navigate = useNavigate()
+  const { error, isLoading, Razorpay } = useRazorpay()
 
   useEffect(()=>{
     handleGetCart()
@@ -16,6 +19,38 @@ const Cart = () => {
   const subtotal = cart?.cart?.totalPrice
   const shipping = 0 // Free
   const total = subtotal + shipping
+
+  const handleCheckout = async () => {
+    const response = await handleCreateOrder()
+    const order = response.order;
+    const options = {
+      key: "rzp_test_SyLSBCgzDGjYLk",
+      amount: order.amount, // Amount in paise
+      currency: order.currency,
+      name: "Snitch",
+      description: "Test Transaction",
+      order_id: order.id, // Generate order_id on server
+      handler: async (response) => {
+        const isValid = await handleVerifyOrder(response.razorpay_order_id, response.razorpay_payment_id, response.razorpay_signature)
+        if(isValid){
+          handleClearLocalCart()
+          navigate(`/order-success?orderId=${order.id}&paymentId=${response?.razorpay_payment_id}`)
+        }
+      },
+      prefill: {
+        name: user?.name || "test user",
+        email: user?.email || "test.doe@example.com",
+        contact: user?.contact || "9999999999",
+      },
+      theme: {
+        color: "#F37254",
+      },
+    };
+
+    const razorpayInstance = new Razorpay(options);
+    razorpayInstance.open();
+  }
+
   return (
     <main className="w-full min-h-screen bg-ivory text-charcoal px-4 md:px-8 pt-24 md:pt-32 pb-16 lg:pb-24 font-body animate-fade-in">
       <div className="max-w-7xl mx-auto">
@@ -154,7 +189,9 @@ const Cart = () => {
                 </div>
               </div>
               
-              <button className="w-full bg-terracotta text-ivory py-4 px-4 text-[10px] font-semibold uppercase tracking-[0.2em] hover:bg-terracotta-dark transition-all duration-300 flex items-center justify-center gap-2 group">
+              <button
+                onClick={handleCheckout}
+                className="w-full bg-terracotta text-ivory py-4 px-4 text-[10px] font-semibold uppercase tracking-[0.2em] hover:bg-terracotta-dark transition-all duration-300 flex items-center justify-center gap-2 group">
                 Proceed to Checkout
                 <span className="transform group-hover:translate-x-1 transition-transform">→</span>
               </button>

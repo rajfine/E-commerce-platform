@@ -9,6 +9,7 @@ import ProductDetail from '../features/products/pages/ProductDetail'
 import SellerProductDetails from '../features/products/pages/SellerProductDetails'
 import Navbar from '../features/products/components/Navbar'
 import Cart from '../features/cart/pages/Cart'
+import Ordersuccess from '../features/cart/pages/Ordersuccess'
 
 const AppLayout = () => {
   const location = useLocation()
@@ -48,6 +49,12 @@ export const router = createBrowserRouter([
         path: "/cart",
         element: <Protected allowedRoles={["seller","buyer"]}>
           <Cart/>
+          </Protected>
+      },
+      {
+        path: "/order-success",
+        element: <Protected allowedRoles={["seller","buyer"]}>
+          <Ordersuccess/>
           </Protected>
       }
     ]

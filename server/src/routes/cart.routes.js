@@ -2,7 +2,7 @@ import express from 'express'
 const cartRouter = express.Router()
 import { authenticateUser } from '../middleware/auth.middleware.js'
 import { ValidateAddToCart } from '../validators/cart.validator.js'
-import { addToCartController, getCartController, updateCartItemSizeController, removeFromCartController, updateCartItemQuantityController} from '../controllers/cart.controller.js'
+import { addToCartController, getCartController, updateCartItemSizeController, removeFromCartController, updateCartItemQuantityController, createOrderController, verifyOrderController } from '../controllers/cart.controller.js'
 
 
 
@@ -51,5 +51,24 @@ cartRouter.delete("/remove/:itemId", authenticateUser, removeFromCartController)
  * @returns Success message
  */
 cartRouter.put("/update-quantity/:itemId", authenticateUser, updateCartItemQuantityController)
+
+
+/**
+ * @route POST /api/cart/payment/create-order
+ * @desc Create a payment order
+ * @access Private
+ * @returns The payment order object
+ */
+cartRouter.post("/payment/create-order", authenticateUser, createOrderController)
+
+
+/**
+ * @route POST /api/cart/payment/verify-order
+ * @desc Verify a payment order
+ * @access Private
+ * @returns The payment order object
+ */
+cartRouter.post("/payment/verify-order", authenticateUser, verifyOrderController)
+
 
 export default cartRouter

@@ -1,6 +1,6 @@
-import { addToCart , getCart, updateCartItemSize, removeFromCart, updateCartItemQuantity } from '../service/cart.api.js'
+import { addToCart , getCart, updateCartItemSize, removeFromCart, updateCartItemQuantity, createOrder , verifyOrder} from '../service/cart.api.js'
 import { useDispatch } from 'react-redux'
-import {addItem, setItems, setCart } from '../state/cart.slice.js'
+import {addItem, setItems, setCart, clearCart } from '../state/cart.slice.js'
 
 
 export const useCart = ()=>{
@@ -31,7 +31,7 @@ export const useCart = ()=>{
     if (data.success) {
       await handleGetCart() // Refresh cart after update
     }
-    return data.cart
+    return data
   }
 
   async function handleRemoveFromCart(itemId) {
@@ -39,7 +39,7 @@ export const useCart = ()=>{
     if (data.success) {
       await handleGetCart()
     }
-    return data.cart
+    return data
   }
 
   async function handleUpdateQuantity(itemId, quantity) {
@@ -47,8 +47,22 @@ export const useCart = ()=>{
     if (data.success) {
       await handleGetCart()
     }
-    return data.cart
+    return data
   }
 
-  return {handleAddItem, handleGetCart, handleUpdateSize, handleRemoveFromCart, handleUpdateQuantity}
+  async function handleCreateOrder(){
+    const data = await createOrder()
+    return data
+  }
+
+  async function handleVerifyOrder(orderId, paymentId, signature){
+    const data = await verifyOrder({orderId, paymentId, signature})
+    return data.success
+  }
+
+  function handleClearLocalCart() {
+    dispatch(clearCart())
+  }
+
+  return {handleAddItem, handleGetCart, handleUpdateSize, handleRemoveFromCart, handleUpdateQuantity, handleCreateOrder, handleVerifyOrder, handleClearLocalCart}
 }

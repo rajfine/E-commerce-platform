@@ -11,7 +11,6 @@ export const addToCart = async ({productId, variantId}) => {
     quantity: 1
   })
   return response.data
-  
 }
 
 
@@ -32,5 +31,17 @@ export const removeFromCart = async (itemId) => {
 
 export const updateCartItemQuantity = async ({ itemId, quantity }) => {
   const response = await cartApiInstance.put(`/update-quantity/${itemId}`, { quantity })
+  return response.data
+}
+
+
+export const createOrder = async () => {
+  const response = await cartApiInstance.post("/payment/create-order")
+  console.log(response.data)
+  return response.data
+}
+
+export const verifyOrder = async ({ orderId, paymentId, signature }) => {
+  const response = await cartApiInstance.post("/payment/verify-order", { orderId, paymentId, signature })
   return response.data
 }
