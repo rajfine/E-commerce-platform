@@ -7,6 +7,7 @@ import { config } from './config/config.js'
 import productRouter from './routes/product.routes.js'
 import cookieParser from 'cookie-parser'
 import cartRouter from './routes/cart.routes.js'
+import likeRouter from './routes/like.routes.js'
 
 
 const app = express()
@@ -36,5 +37,6 @@ app.use(cors({
 app.use("/api/auth", authRouter)
 app.use("/api/product", productRouter)
 app.use("/api/cart", cartRouter)
+app.use("/api/like", likeRouter)
 
 export default app

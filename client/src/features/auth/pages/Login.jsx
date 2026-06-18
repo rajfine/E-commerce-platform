@@ -16,9 +16,9 @@ const InputField = ({ label, name, type, value, onChange, focused, setFocused, e
 
     return (
         <div className="relative group">
-            <div className={`relative flex items-center w-full bg-white/70 backdrop-blur-md shadow-[inset_0_1px_3px_rgba(0,0,0,0.03)] border rounded-[3px] transition-all duration-300 ${isFocused ? 'border-amber-400 ring-[3px] ring-amber-400/20' : error ? 'border-red-300 bg-red-50/50' : 'border-white/40 hover:border-white hover:bg-white/90'}`}>
+            <div className={`relative flex items-center w-full bg-transparent border transition-all duration-300 ${isFocused ? 'border-charcoal ring-1 ring-charcoal' : error ? 'border-terracotta' : 'border-sand hover:border-charcoal/30'}`}>
                 {prefix && (
-                    <span className={`absolute left-4 top-6 text-[15px] font-medium transition-all duration-300 ${isActive ? 'text-neutral-800 opacity-100' : 'opacity-0'}`}>
+                    <span className={`absolute left-4 top-1/2 -translate-y-1/2 text-[14px] font-medium transition-all duration-300 ${isActive ? 'text-charcoal opacity-100' : 'opacity-0'}`}>
                         {prefix}
                     </span>
                 )}
@@ -31,13 +31,13 @@ const InputField = ({ label, name, type, value, onChange, focused, setFocused, e
                     onFocus={() => setFocused(name)}
                     onBlur={() => setFocused('')}
                     maxLength={maxLength}
-                    className={`w-full bg-transparent outline-none text-neutral-800 text-[15px] font-medium transition-all pt-6 pb-2.5 ${prefix && isActive ? 'pl-12 pr-4' : 'px-4'}`}
+                    className={`w-full bg-transparent outline-none text-charcoal text-[14px] font-medium transition-all pt-6 pb-2.5 ${prefix && isActive ? 'pl-12 pr-4' : 'px-4'}`}
                 />
 
                 {/* Floating Label */}
                 <label
                     htmlFor={name}
-                    className={`absolute cursor-text transition-all duration-300 pointer-events-none ${isActive ? 'text-[11px] font-semibold top-1.5 left-4 text-amber-700 uppercase tracking-wide' : 'text-sm top-3.5 left-4 text-neutral-500 font-medium'}`}
+                    className={`absolute cursor-text transition-all duration-300 pointer-events-none ${isActive ? 'text-[10px] font-semibold top-1.5 left-4 text-charcoal/60 uppercase tracking-widest' : 'text-sm top-1/2 -translate-y-1/2 left-4 text-charcoal/50 font-medium'}`}
                 >
                     {label}
                 </label>
@@ -51,7 +51,7 @@ const InputField = ({ label, name, type, value, onChange, focused, setFocused, e
             </div>
             {/* Simple Inline Error */}
             <div className={`overflow-hidden transition-all duration-300 ${error ? 'h-6 opacity-100' : 'h-0 opacity-0'}`}>
-                {error && <p className="text-[11px] text-red-600 font-semibold pt-1.5 pl-2 flex items-center gap-1.5 mb-1"><span className="w-1 h-1 rounded-full bg-red-600 inline-block"></span>{error}</p>}
+                {error && <p className="text-[10px] text-terracotta uppercase tracking-widest pt-1.5 pl-2 flex items-center gap-1 mb-1">{error}</p>}
             </div>
         </div>
     );
@@ -98,10 +98,10 @@ const Login = () => {
     };
 
     return (
-        <div className="relative min-h-screen w-full flex font-sans selection:bg-amber-200">
+        <div className="relative min-h-screen w-full flex font-body bg-ivory selection:bg-sand/30">
             <style>{`
                 @keyframes smoothFadeUp {
-                    from { opacity: 0; transform: translateY(30px); }
+                    from { opacity: 0; transform: translateY(20px); }
                     to { opacity: 1; transform: translateY(0); }
                 }
                 .animate-entry {
@@ -112,52 +112,33 @@ const Login = () => {
                 .animate-delay-3 { animation-delay: 0.3s; }
             `}</style>
 
-            {/* FULL-SCREEN BACKGROUND IMAGE */}
-            <div className="absolute inset-0 z-0 overflow-hidden bg-neutral-900">
-                <img
-                    src="https://i.pinimg.com/1200x/0d/1d/8b/0d1d8b3c63e3152f841380cd2f01b6d9.jpg"
-                    alt="Premium Fashion Lifestyle"
-                    className="w-full h-full object-cover opacity-90 transition-transform duration-[10s] ease-out hover:scale-105 "
-                />
-                {/* Premium Gradients to ensure text and card readability across the screen */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/60"></div>      
-            </div>
-
-            {/* CONTENT CONTAINER - Sitting on top of the background */}
             <div className="relative z-10 flex w-full h-full min-h-screen">
-
-                {/* LEFT SIDE: Imagery & Brand */}
-                <div className="hidden lg:flex lg:w-[45%] xl:w-1/2 flex-col justify-between p-12 lg:p-16">
-                    <div className="text-4xl font-serif font-black tracking-widest text-white uppercase drop-shadow-lg animate-entry">
-                        Snitch
-                    </div>
-                    <div className="max-w-md animate-entry animate-delay-1 pb-10">
-                        <h1 className="text-4xl xl:text-5xl font-bold leading-tight text-white mb-6">
-                            Welcome back to <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-200">
-                                Your Signature Look
-                            </span>
-                        </h1>
-                        <p className="text-lg text-white/80 font-light leading-relaxed">
-                            Sign in to continue exploring the most exclusive streetwear collective and manage your account.
-                        </p>
+                {/* LEFT SIDE: Image */}
+                <div className="hidden lg:block lg:w-1/2 relative overflow-hidden bg-surface">
+                    <img
+                        src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1400&auto=format&fit=crop"
+                        alt="Minimal Fashion Aesthetic"
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-12 left-12">
+                        <div className="text-3xl font-display uppercase tracking-widest text-charcoal">
+                            Snitch
+                        </div>
                     </div>
                 </div>
 
                 {/* RIGHT SIDE: Onboarding Form */}
-                <div className="w-full lg:w-[55%] xl:w-1/2 flex items-center justify-center p-6 sm:p-12 relative">
+                <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 xl:p-20 relative bg-ivory text-charcoal">
 
-                    {/* Mobile Branding (Visible only on smaller screens) */}
+                    {/* Mobile Branding */}
                     <div className="absolute top-8 w-full text-center z-10 lg:hidden">
-                        <h1 className="text-3xl font-serif font-black tracking-widest text-white uppercase drop-shadow-md">Snitch</h1>
+                        <h1 className="text-2xl font-display uppercase tracking-widest text-charcoal">Snitch</h1>
                     </div>
 
-                    {/* Floating Glassmorphism Form Card */}
-                    <div className="w-full max-w-lg bg-white/10 backdrop-blur-[24px] rounded-[2rem] p-8 sm:p-10 lg:p-12 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)] border border-white/30 animate-entry mt-24 lg:mt-0">
-
-                        <div className="mb-10 text-center lg:text-left">
-                            <h2 className="text-3xl font-bold text-white mb-3 tracking-tight">Welcome Back</h2>
-                            <p className="text-white/80 text-sm font-medium">Log in to your account.</p>
+                    <div className="w-full max-w-md animate-entry mt-16 lg:mt-0">
+                        <div className="mb-12 text-center lg:text-left">
+                            <h2 className="font-display text-3xl md:text-4xl uppercase tracking-tight mb-3">Welcome Back</h2>
+                            <p className="text-charcoal/60 text-[13px] tracking-widest uppercase">Log in to your account.</p>
                         </div>
 
 
@@ -179,7 +160,7 @@ const Login = () => {
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="p-1.5 text-neutral-500 hover:text-amber-600 hover:bg-black/5 rounded-[3px] transition-all focus:outline-none"
+                                        className="p-1.5 text-charcoal/50 hover:text-charcoal hover:bg-surface rounded-sm transition-all focus:outline-none"
                                         aria-label="Toggle password visibility"
                                     >
                                         {showPassword ? <EyeOff /> : <Eye />}
@@ -188,17 +169,17 @@ const Login = () => {
                             </div>
 
                             <div className="text-right mt-2">
-                                <a href="#" className="text-xs font-bold text-white/70 hover:text-amber-400 transition-colors">Forgot Password?</a>
+                                <a href="#" className="text-[10px] tracking-widest uppercase text-charcoal/60 hover:text-terracotta transition-colors">Forgot Password?</a>
                             </div>
 
                             {/* Action Button */}
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full mt-6 py-4 bg-amber-500 text-neutral-900 rounded-[3px] font-bold text-sm tracking-wide shadow-[0_10px_20px_rgba(245,158,11,0.25)] hover:shadow-[0_15px_25px_rgba(245,158,11,0.35)] hover:-translate-y-1 hover:bg-amber-400 active:translate-y-0 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+                                className="w-full mt-8 py-4 bg-terracotta text-white rounded-[3px] font-semibold text-[11px] uppercase tracking-widest hover:bg-terracotta-dark active:scale-[0.99] transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
                             >
                                 {isSubmitting ? (
-                                    <svg className="animate-spin h-5 w-5 text-neutral-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                                 ) : (
                                     <>
                                         Log In
@@ -210,25 +191,25 @@ const Login = () => {
 
                         {/* Divider */}
                         <div className="mt-8 mb-6 flex items-center justify-between opacity-80">
-                            <div className="flex-1 h-px bg-white/20"></div>
-                            <span className="px-5 text-[11px] font-bold text-white/80 uppercase tracking-widest">Or log in with</span>
-                            <div className="flex-1 h-px bg-white/20"></div>
+                            <div className="flex-1 h-px bg-sand"></div>
+                            <span className="px-5 text-[10px] font-semibold text-charcoal/50 uppercase tracking-widest">Or log in with</span>
+                            <div className="flex-1 h-px bg-sand"></div>
                         </div>
 
                         {/* Social Authentication */}
                         <div className="flex justify-center gap-5">
-                            <button type="button" className="p-3.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-[3px] hover:bg-white/20 hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg group text-white">
+                            <button type="button" className="p-3.5 bg-ivory border border-sand rounded-[3px] hover:border-charcoal hover:scale-105 hover:-translate-y-1 transition-all duration-300 group text-charcoal shadow-sm">
                                 <a href='api/auth/google' className="group-hover:scale-110 transition-transform block"><GoogleIcon /></a>
                             </button>
-                            <button type="button" className="p-3.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-[3px] hover:bg-white/20 hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg group text-white">
+                            <button type="button" className="p-3.5 bg-ivory border border-sand rounded-[3px] hover:border-charcoal hover:scale-105 hover:-translate-y-1 transition-all duration-300 group text-charcoal shadow-sm">
                                 <span className="group-hover:scale-110 transition-transform block"><AppleIcon /></span>
                             </button>
                         </div>
 
                         {/* Register Link */}
-                        <div className="mt-10 text-center flex justify-center items-center gap-1.5">
-                            <span className="text-sm text-white/80 font-medium">New here?</span>
-                            <Link to="/register" className="text-sm font-bold text-white border-b-2 border-white/40 hover:text-amber-400 hover:border-amber-400 transition-colors pb-0.5">
+                        <div className="mt-10 text-center flex justify-center items-center gap-2">
+                            <span className="text-[11px] uppercase tracking-widest text-charcoal/60">New here?</span>
+                            <Link to="/register" className="text-[11px] uppercase tracking-widest font-semibold text-charcoal border-b border-charcoal hover:text-terracotta hover:border-terracotta transition-colors pb-0.5">
                                 Create an Account
                             </Link>
                         </div>

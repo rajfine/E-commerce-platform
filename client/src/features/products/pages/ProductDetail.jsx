@@ -3,6 +3,8 @@ import { useParams } from 'react-router'
 import { useNavigate } from 'react-router-dom'
 import { useProduct } from '../hooks/useProduct.js'
 import { useCart } from '../../cart/hook/useCart.js'
+import { useSelector } from 'react-redux'
+import { useLike } from '../../likes/hooks/useLike.js'
 
 /* ─────────────────────────────────────────────────────────────────────────────
   PRODUCT DETAIL PAGE  ·  SNITCH Premium Fashion E-commerce
@@ -95,7 +97,9 @@ const ProductDetail = () => {
   const { productId } = useParams()
   const { handleGetProductById } = useProduct()
   const { handleAddItem } = useCart()
+  const { handleToggleLike, likedProducts } = useLike()
   const navigate = useNavigate()
+  const user = useSelector(state => state.auth.user)
 
   /* ── State ──────────────────────────────────────────────────────────────── */
   const [product, setProduct]         = useState(null)
@@ -104,6 +108,7 @@ const ProductDetail = () => {
   const [imageLoaded, setImageLoaded] = useState(false)
   const [quantity, setQuantity]       = useState(1)
   const [addedToCart, setAddedToCart] = useState(false)
+  const [showLoginPopup, setShowLoginPopup] = useState(false)
   const [zoomProps, setZoomProps]     = useState({ show: false, x: 0, y: 0 })
   /* MAIN_ID = base product selected (default); variant._id = variant selected */
   const [selectedId, setSelectedId]   = useState(MAIN_ID)
@@ -248,13 +253,29 @@ const ProductDetail = () => {
   }, [])
 
   const handleAddToCart = () => {
+    if (!user) {
+      setShowLoginPopup(true)
+      return
+    }
     setAddedToCart(true)
     handleAddItem({                                                    
       productId: product._id,
       variantId: activeSlot.id === MAIN_ID ? null : activeSlot.id,
       size: selectedSize || activeSlot.sizes?.[0]?.label || 'XS',
+      quantity: quantity
     })
     setTimeout(() => setAddedToCart(false), 2000)
+  }
+
+  const isLiked = likedProducts?.some(p => p._id === product?._id)
+
+  const handleWishlistToggle = (e) => {
+    e.preventDefault()
+    if (!user) {
+      setShowLoginPopup(true)
+      return
+    }
+    handleToggleLike(product)
   }
 
   /* ─────────────────────────────────────────────────────────────────────────
@@ -704,12 +725,12 @@ const ProductDetail = () => {
 
             {/* ── Wishlist / Share ── */}
             <div className="flex items-center gap-5 mb-10">
-              <button className="flex items-center gap-2 text-charcoal/50 hover:text-charcoal transition-colors duration-200 group">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"
+              <button onClick={handleWishlistToggle} className="flex items-center gap-2 text-charcoal/50 hover:text-charcoal transition-colors duration-200 group">
+                <svg width="16" height="16" fill={isLiked ? '#C86B3C' : 'none'} stroke={isLiked ? '#C86B3C' : 'currentColor'} strokeWidth="1.5" viewBox="0 0 24 24"
                   className="group-hover:fill-terracotta group-hover:stroke-terracotta transition-all duration-200">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                 </svg>
-                <span className="font-body text-[10px] tracking-[0.1em] uppercase">Wishlist</span>
+                <span className={`font-body text-[10px] tracking-[0.1em] uppercase ${isLiked ? 'text-terracotta font-medium' : ''}`}>Wishlist</span>
               </button>
               <div className="w-px h-4 bg-sand" />
               <button className="flex items-center gap-2 text-charcoal/50 hover:text-charcoal transition-colors duration-200">
@@ -762,6 +783,41 @@ const ProductDetail = () => {
           </section>
         </div>
       </main>
+
+      {/* ── Login Popup Modal ── */}
+      {showLoginPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-softblack/50 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="bg-ivory w-full max-w-sm rounded-[3px] p-8 shadow-xl relative animate-slide-up">
+            <button 
+              onClick={() => setShowLoginPopup(false)}
+              className="absolute top-4 right-4 text-charcoal/50 hover:text-charcoal transition-colors"
+            >
+              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <div className="text-center">
+              <div className="w-12 h-12 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center mx-auto mb-4">
+                <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+              </div>
+              <h3 className="font-display text-2xl text-charcoal mb-2">Login Required</h3>
+              <p className="font-body text-sm text-charcoal/70 mb-6">Please log in to your account to continue.</p>
+              <div className="flex flex-col gap-3">
+                <button 
+                  onClick={() => navigate('/login')}
+                  className="w-full py-3 bg-terracotta text-white text-[11px] font-semibold tracking-widest uppercase rounded-[3px] hover:bg-terracotta-dark transition-colors"
+                >
+                  Log In
+                </button>
+                <button 
+                  onClick={() => setShowLoginPopup(false)}
+                  className="w-full py-3 border border-sand text-charcoal text-[11px] font-semibold tracking-widest uppercase rounded-[3px] hover:bg-surface transition-colors"
+                >
+                  Continue Shopping
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

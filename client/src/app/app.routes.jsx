@@ -10,6 +10,7 @@ import SellerProductDetails from '../features/products/pages/SellerProductDetail
 import Navbar from '../features/products/components/Navbar'
 import Cart from '../features/cart/pages/Cart'
 import Ordersuccess from '../features/cart/pages/Ordersuccess'
+import Wishlist from '../features/likes/pages/Wishlist'
 
 const AppLayout = () => {
   const location = useLocation()
@@ -56,6 +57,12 @@ export const router = createBrowserRouter([
         element: <Protected allowedRoles={["seller","buyer"]}>
           <Ordersuccess/>
           </Protected>
+      },
+      {
+        path: "/wishlist",
+        element: <Protected allowedRoles={["seller","buyer"]}>
+          <Wishlist/>
+        </Protected>
       }
     ]
   },
